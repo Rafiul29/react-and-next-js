@@ -1,12 +1,13 @@
-export default function TableBody({ student }) {
+export default function TableBody({ studentsData }) {
+  const {clsName,students}=studentsData
   return (
     <tbody>
       <tr className="bg-white/5">
         <td className="p-5 text-sm md:text-xl" colSpan="4">
-          {student?.clsName}
+          {clsName}
         </td>
       </tr>
-      {student?.students?.map((student) => (
+      {students.map((student) => (
         <tr key={student.id} className="border-b border-[#7ECEB529]">
           <td className="p-5 text-sm md:text-xl">{student.id}</td>
           <td className="p-5 text-sm md:text-xl">

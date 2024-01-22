@@ -9,8 +9,8 @@ export const Table = () => {
         <TableHeader />
 
         {
-          StudentsTable.map((student)=>(
-              <TableBody key={student.clsName} student={student}/>
+          StudentsTable.map((students)=>(
+              <TableBody key={students.clsName} studentsData={students}/>
           ))
         }
       </table>
