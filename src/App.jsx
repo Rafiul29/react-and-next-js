@@ -1,10 +1,16 @@
+import Footer from "./components/Footer";
+import { Hero } from "./components/Hero";
+import Navbar from "./components/Navbar";
+import StudentTable from "./components/StudentTable";
+
 function App() {
   return (
-    <>
-      <button className="bg-white  border border-gray-200 h-12  w-12 m-1  rounded-md leading-9 text-lg cursor-pointer">
-        X
-      </button>
-    </>
+    <body className="bg-[#172227] font-[Inter] text-white">
+      <Navbar/>
+      <Hero/>
+      <StudentTable/>
+      <Footer/>
+    </body>
   );
 }
 
