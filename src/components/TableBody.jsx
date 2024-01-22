@@ -1,3 +1,4 @@
+import avatar from "../assets/avatar.png"
 export default function TableBody({ studentsData }) {
   const {clsName,students}=studentsData
   return (
@@ -13,8 +14,8 @@ export default function TableBody({ studentsData }) {
           <td className="p-5 text-sm md:text-xl">
             <div className="flex space-x-3 items-center">
               <img
-                className="w-8 h-8"
-                src="./assets/avatar.png"
+                className="w-8 h-8 border rounded-full"
+                src={avatar}
                 width="32"
                 height="32"
                 
