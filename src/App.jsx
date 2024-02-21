@@ -9,10 +9,14 @@ function App() {
   const [books, setBooks] = useState([...booksList]);
 
   function handleSearch(searchTerm) {
-    const filterBooks = books.filter((book) =>
-      book.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setBooks([...filterBooks]);
+    if (searchTerm !== "") {
+      const filterBooks = books.filter((book) =>
+        book.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setBooks([...filterBooks]);
+    } else {
+      setBooks([...booksList]);
+    }
   }
 
   function handleSort(sortBy) {
@@ -35,12 +39,26 @@ function App() {
       setBooks([...books]);
     }
   }
+
+  function handleFavourite(favBook) {
+    const favouriteBook = books.map((book) => {
+      if (book.id === favBook.id) {
+        return {
+          ...book,
+          isFavourite: !book.isFavourite,
+        };
+      } else {
+        return book;
+      }
+    });
+    setBooks(favouriteBook);
+  }
   return (
     <>
       <Navbar />
       <main className="my-10 lg:my-14">
         <Header onSearch={handleSearch} onSort={handleSort} />
-        <BookList books={books} />
+        <BookList books={books} onFav={handleFavourite} />
       </main>
       <Footer />
     </>

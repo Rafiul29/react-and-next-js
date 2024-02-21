@@ -3,15 +3,33 @@ import { useState } from "react";
 const Header = ({ onSearch, onSort }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  function handleChnage(e) {
-    e.preventDefault();
+  //debounce handler
+  function debounce(fn, delay) {
+    console.log("first");
+    let timeoutId;
+    return function () {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        fn();
+      }, delay);
+    };
+  }
+
+  const debouncedHandleClick = debounce(function () {
     onSearch(searchTerm);
+  }, 2000);
+
+  function handleClick(e) {
+    e.preventDefault();
+    debouncedHandleClick();
   }
 
   function handleChangeSort(e) {
     e.preventDefault();
     let sortBy = e.target.value;
-      onSort(sortBy);
+    onSort(sortBy);
   }
 
   return (
@@ -36,7 +54,7 @@ const Header = ({ onSearch, onSort }) => {
                 />
                 <div className="absolute right-0 top-0 flex h-full items-center">
                   <button
-                    onClick={handleChnage}
+                    onClick={handleClick}
                     type="submit"
                     className="mr-1.5 flex items-center space-x-1.5 rounded-md rounded-e-lg bg-[#1C4336] px-4 py-2.5 text-sm text-white"
                   >
