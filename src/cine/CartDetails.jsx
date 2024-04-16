@@ -3,17 +3,21 @@ import { MovieContext } from '../context'
 import Delete from "../assets/delete.svg"
 import Checkout from "../assets/icons/checkout.svg"
 import { getImgeUrl } from '../utils/cine-utility'
+import { toast } from 'react-toastify'
 export const CartDetails = ({ onClose }) => {
 
 
-  const { cartData, setCartData } = useContext(MovieContext)
+  const { state,dispatch } = useContext(MovieContext)
 
-  function handleDeleteCart(event,itemId){
-    console.log("first")
+  function handleDeleteCart(event,item){
     event.preventDefault()
-
-    const filterdItem=cartData.filter((item)=>item.id!=itemId)
-    setCartData([...filterdItem])
+      dispatch({
+        type:"REMOVE_FROM_CART",
+        payload:item
+      })
+      toast.success(`Remove ${item.title} from the cart`,{
+        position:"bottom-right"
+      })
   }
 
   return (
@@ -32,8 +36,8 @@ export const CartDetails = ({ onClose }) => {
             className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
           >
             {
-              cartData.length==0 ?(<p className='text-3xl'>The cart is empty</p>)
-            :cartData.map(item => (
+              state.cartData.length==0 ?(<p className='text-3xl'>The cart is empty</p>)
+            :state.cartData.map(item => (
               <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
                 <div className="flex items-center gap-4">
                   <img
@@ -53,7 +57,7 @@ export const CartDetails = ({ onClose }) => {
                 </div>
                 <div className="flex justify-between gap-4 items-center">
                   <button
-                    onClick={()=>handleDeleteCart(event,item.id)}
+                    onClick={()=>handleDeleteCart(event,item)}
                     className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                   >
                     <img className="w-5 h-5" src={Delete} alt="" />
