@@ -11,6 +11,7 @@ import { WeatherContext } from '../../Context'
 const WeatherCondition = () => {
 
   const { weatherData } = useContext(WeatherContext)
+
   const { minTemperature,
     maxTemperature,
     humidity,

@@ -14,7 +14,6 @@ import { getFormatteDate } from '../../utils/date-utils'
 const WeatherHeadLine = () => {
 
   const { weatherData } = useContext(WeatherContext)
-
   const { climate, location, temperature, time } = weatherData
 
   function getWeatherIcon(climate) {
