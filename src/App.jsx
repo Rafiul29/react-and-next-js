@@ -1,7 +1,11 @@
+import TransactionBoard from "./component/TransactionBoard";
+import Navbar from "./component/Navbar";
+
 function App() {
   return (
     <>
-     app
+    <Navbar/>
+    <TransactionBoard/>
     </>
   );
 }
