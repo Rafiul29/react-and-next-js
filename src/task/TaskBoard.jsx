@@ -90,6 +90,8 @@ const TaskBoard = () => {
     );
     setTasks([...filtered]);
   }
+
+  
   return (
     <section className="mb-20" id="tasks">
       {showAddMoal && (
