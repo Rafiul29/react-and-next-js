@@ -3,7 +3,7 @@ import ExpanseSummary from "./ExpanseSummary";
 import IncomeList from "./IncomeList";
 import ExpanseList from "./ExpenseList";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+
 
 
 
@@ -29,13 +29,13 @@ const TransactionBoard = () => {
     if (isAdd) {
       setTransactions((prevTransactions) => {
         const updatedTransactions = [
-          { ...formData, id: uuidv4() },
+         formData,
           ...prevTransactions,
         ];
         return updatedTransactions;
       });
     } else {
-      // setTransactions();
+      // setTransactions(tra));
     }
     setEditTransaction(null)
   };

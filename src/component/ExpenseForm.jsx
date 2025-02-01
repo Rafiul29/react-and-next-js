@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { v4 as uuidv4 } from "uuid";
 
 
 const ExpanseForm = ({ onAddEditForm ,categories,editTranstion}) => {
@@ -27,6 +27,7 @@ const isAdd =Object.is(editTranstion,null)
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
+      id: uuidv4(),
       transactionType,
       category,
       amount:Number(amount),
