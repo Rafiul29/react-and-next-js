@@ -27,15 +27,16 @@ const TaskBoard = () => {
       setTaskToUpdate(null);
       setTasks([...tasks, newTask]);
     } else {
-      setTasks(
-        tasks.map((task) => {
-          if (task.id === newTask.id) {
-            return newTask;
-          } else {
-            return task;
-          }
-        })
-      );
+      // setTasks(
+      //   tasks.map((task) => {
+      //     if (task.id === newTask.id) {
+      //       return newTask;
+      //     } else {
+      //       return task;
+      //     }
+      //   })
+      // );
+      setTasks(tasks.map((task)=>task.id===newTask.id ? newTask:task))
     }
     setShowAddModal(!showAddMoal);
   }
@@ -88,7 +89,7 @@ const TaskBoard = () => {
     const filtered = tasks.filter((task) =>
       task.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
     );
-    setTasks([...filtered]);
+    setTasks(filtered);
   }
 
   
