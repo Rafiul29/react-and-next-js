@@ -21,6 +21,7 @@ const ExpenseList = ({ transactions, categories, onDelTask, onEdit }) => {
   }, [transactions, selectedCategory]);
 
   const shortExpense = (order) => {
+    console.log('c')
     setExpenseList(
       [...expenselist].sort((a, b) => {
         return order === "high" ? b.amount - a.amount : a.amount - b.amount;
@@ -64,6 +65,7 @@ const ExpenseList = ({ transactions, categories, onDelTask, onEdit }) => {
               <button
                 onClick={() => {
                   setShotShow((prev) => !prev);
+                  console.log('p')
                 }}
                 type="button"
                 className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
