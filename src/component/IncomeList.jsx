@@ -1,4 +1,14 @@
+import { useEffect, useState } from "react";
+
 const IncomeList = ({ transactions, categories, onDelTask, onEdit }) => {
+const[incomelist,setIncomeList]=useState([])
+console.log("transactions income", incomelist,transactions)
+      useEffect(()=>{
+        if(transactions){
+          setIncomeList(transactions)
+        }
+      },[transactions])
+      
   return (
     <div className="border rounded-md relative">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -152,7 +162,7 @@ const IncomeList = ({ transactions, categories, onDelTask, onEdit }) => {
       </div>
 
       <div className="p-4 divide-y">
-        {transactions
+        {incomelist
           .filter((tr) => tr.transactionType == "income")
           .map((data) => (
             <div
@@ -161,7 +171,7 @@ const IncomeList = ({ transactions, categories, onDelTask, onEdit }) => {
             >
               <div>
                 <h3 className="text-base font-medium leading-7 text-gray-600">
-                {data.category}
+                {data.category}  {data.id}
                 </h3>
                 <p className="text-xs text-gray-600">{data.date}</p>
               </div>
@@ -169,7 +179,7 @@ const IncomeList = ({ transactions, categories, onDelTask, onEdit }) => {
                 <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
                   BDT {data.amount}
                 </p>
-
+               
                 <div className="translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 absolute right-0 top-1/2 -translate-y-1/2 transition-all">
                   <button
                     className="hover:text-teal-600"
@@ -177,6 +187,7 @@ const IncomeList = ({ transactions, categories, onDelTask, onEdit }) => {
                     title="Edit Button"
                     onClick={() => onEdit(data.id)}
                   >
+               
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"

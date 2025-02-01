@@ -23,7 +23,6 @@ const ExpenseSummary = ({ transactions }) => {
 
     setSummary(result);
   }, [transactions]);
-  console.log(summary);
 
   return (
     <div className="bg-white">

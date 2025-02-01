@@ -1,44 +1,34 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
+const ExpanseForm = ({ onAddEditForm, categories, editTranstion }) => {
 
-const ExpanseForm = ({ onAddEditForm ,categories,editTranstion}) => {
-console.log(editTranstion)
   const [transactionType, setTransactionType] = useState("expense");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
 
-  console.log(transactionType,editTranstion)
-  useEffect(()=>{
-    if(editTranstion?.id){
-    setCategory(editTranstion?.category)
-    setAmount(editTranstion?.amount)
-    setDate(editTranstion?.date)
-    setTransactionType(editTranstion?.transactionType)
+  useEffect(() => {
+    if (editTranstion?.id) {
+      setCategory(editTranstion?.category);
+      setAmount(editTranstion?.amount);
+      setDate(editTranstion?.date);
+      setTransactionType(editTranstion?.transactionType);
     }
-
-    console.log
-  },[editTranstion?.id])
-
-const isAdd =Object.is(editTranstion,null)
-
+  }, [editTranstion]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      id: uuidv4(),
       transactionType,
       category,
-      amount:Number(amount),
+      amount: Number(amount),
       date,
     };
-    console.log(formData)
-    onAddEditForm(formData, isAdd,editTranstion?.id);
+    onAddEditForm(formData, editTranstion?.id);
 
-      setCategory("")
-      setAmount("")
-      setDate("")
+    setCategory("");
+    setAmount("");
+    setDate("");
   };
 
   return (
@@ -87,10 +77,9 @@ const isAdd =Object.is(editTranstion,null)
               <option value="" selected disabled>
                 select category
               </option>
-              
-             
-              {categories[transactionType]?.map((category,i) => (
-                <option key={i} value={category} >
+
+              {categories[transactionType]?.map((category, i) => (
+                <option key={i} value={category}>
                   {category}
                 </option>
               ))}
