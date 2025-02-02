@@ -139,6 +139,7 @@ const ExpenseList = ({ transactions, categories, onDelTask, onEdit }) => {
                 aria-haspopup="true"
                 onClick={() => {
                   setShowFilterCat((prev) => !prev)
+                  setShotShow
                 }}
               >
                 <svg
