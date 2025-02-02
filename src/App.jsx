@@ -1,7 +1,9 @@
+import Accordion from "./components/Accordion";
+
 function App() {
   return (
     <>
-     app
+<Accordion/>
     </>
   );
 }
