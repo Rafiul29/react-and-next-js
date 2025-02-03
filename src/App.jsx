@@ -1,9 +1,11 @@
-import Accordion from "./components/Accordion";
+// import TaskApp from "./components/propsDriling/TaskApp";
 
+
+import TaskApp from "./components/reducer/TaskApp";
 function App() {
   return (
     <>
-<Accordion/>
+      <TaskApp></TaskApp>
     </>
   );
 }
