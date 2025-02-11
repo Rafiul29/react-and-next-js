@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useTaskContext } from "../contexts/useContext";
 
-const Task = ({ task, onDelete, oneEdit }) => {
+const Task = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
+
+  const { dispatch } = useTaskContext();
 
   let content;
 
@@ -25,9 +28,12 @@ const Task = ({ task, onDelete, oneEdit }) => {
         <input
           value={task.text}
           onChange={(e) => {
-            oneEdit({
-              ...task,
-              text: e.target.value,
+            dispatch({
+              type: "change",
+              task: {
+                ...task,
+                text: e.target.value,
+              },
             });
           }}
           className="border p-1 rounded-md"
@@ -52,16 +58,24 @@ const Task = ({ task, onDelete, oneEdit }) => {
         id=""
         checked={task.done}
         onChange={(e) => {
-          oneEdit({
-            ...task,
-            done: e.target.checked,
+          dispatch({
+            task: {
+              ...task,
+              done: e.target.checked,
+            },
+            type: "change",
           });
         }}
       />
       {content}
       <button
         className="px-3 bg-gray-200 rounded"
-        onClick={() => onDelete(task.id)}
+        onClick={() => {
+          dispatch({
+            type: "deleted",
+            id: task.id,
+          });
+        }}
       >
         delete
       </button>

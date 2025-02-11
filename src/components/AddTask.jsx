@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useTaskContext } from "../contexts/useContext";
 
 const AddTask = ({ onAddTask }) => {
   const [text, setText] = useState("");
+
+  const { dispatch } = useTaskContext();
 
   return (
     <div className="space-x-2">
@@ -15,7 +18,10 @@ const AddTask = ({ onAddTask }) => {
         className="px-3 bg-gray-200 rounded"
         onClick={(e) => {
           setText("");
-          onAddTask(text);
+          dispatch({
+            type: "added",
+            text,
+          });
         }}
       >
         Save
