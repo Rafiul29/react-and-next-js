@@ -1,7 +1,11 @@
+import LoginForm from "./components/forms/LoginForm";
+import RegistrationForm from "./components/forms/RegistrationForm";
+
 function App() {
   return (
     <>
-     app
+     {/* <LoginForm></LoginForm> */}
+     <RegistrationForm></RegistrationForm>
     </>
   );
 }
