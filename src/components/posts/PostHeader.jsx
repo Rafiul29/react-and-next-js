@@ -6,18 +6,40 @@ import { useState } from "react";
 import { getDateDifferenceFormNow } from "../../utils";
 import { useAuth } from "../../hooks/useAuth";
 import { useAvatar } from "../../hooks/useAvater";
-
+import { usePost } from "../../hooks/usePost";
+import useAxios from '../../hooks/useAxios'
+import { actions } from "../../actions";
 const PostHeader = ({ post }) => {
-  const { state } = useAuth();
+  const { auth } = useAuth();
 
   const [showAction, setShowAction] = useState(false);
   const { avatarUrl } = useAvatar(post);
+  const {dispatch} = usePost();
+  const {api} = useAxios();
 
+  const isMe = post?.author?.id == auth?.user?.id;
 
-  function toggleAction(){
-    setShowAction(!showAction)
+  function toggleAction() {
+    setShowAction(!showAction);
   }
-  
+
+  const handleDeletePost = async () => {
+    dispatch({ type: actions.post.DATA_FETCHING });
+       try {
+
+         const response = await api.delete(
+           `${import.meta.env.VITE_SERVER_BASE_URL}/posts/${post.id}` );
+   
+         if (response.status == 200) {
+           dispatch({ type: actions.post.POST_DELEDTED, data: post.id });
+   
+         }
+       } catch (error) {
+         console.log(error);
+         dispatch({ type: actions.post.DATA_FETCH_ERROR, error: response?.error });
+       }
+  };
+
   return (
     <header className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-3">
@@ -38,9 +60,11 @@ const PostHeader = ({ post }) => {
       </div>
 
       <div className="relative">
-        <button onClick={toggleAction}>
-          <img src={ThreeDotIcon} alt="3dots of Action" />
-        </button>
+        {isMe && (
+          <button onClick={toggleAction}>
+            <img src={ThreeDotIcon} alt="3dots of Action" />
+          </button>
+        )}
 
         {showAction && (
           <div className="action-modal-container">
@@ -48,7 +72,10 @@ const PostHeader = ({ post }) => {
               <img src={EditIcon} alt="Edit" />
               Edit
             </button>
-            <button className="action-menu-item hover:text-red-500">
+            <button
+              className="action-menu-item hover:text-red-500"
+              onClick={handleDeletePost}
+            >
               <img src={DeleteIcon} alt="Delete" />
               Delete
             </button>

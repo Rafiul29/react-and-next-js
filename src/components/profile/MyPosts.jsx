@@ -1,6 +1,7 @@
 import React from 'react'
 import { useProfile } from '../../hooks/useProfile'
-import PostList from '../post/PostList';
+import PostList from '../posts/PostList';
+
 
 const MyPosts = () => {
 

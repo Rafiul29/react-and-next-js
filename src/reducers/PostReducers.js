@@ -1,3 +1,4 @@
+
 import { actions } from "../actions";
 
 const initialState = {
@@ -26,6 +27,20 @@ const postReducer = (state, action) => {
         ...state,
         loading: false,
         error: action.error,
+      };
+    }
+    case actions.post.DATA_CREATED: {
+      return {
+        ...state,
+        posts: [...state.posts,action.data],
+        loading: false,
+      };
+    }
+    case actions.post.POST_DELEDTED: {
+      return {
+        ...state,
+        posts: state.posts.filter(item=>item.id!==action.data),
+        loading: false,
       };
     }
     default: {

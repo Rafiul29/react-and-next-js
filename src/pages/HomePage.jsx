@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+
 import { usePost } from "../hooks/usePost";
 import useAxios from "../hooks/useAxios";
-import PostList from "../components/post/PostList";
 import { useEffect } from "react";
 import {actions} from '../actions'
-
+import PostList from "../components/posts/PostList";
+import NewPost from "../components/posts/NewPost";
+ 
 const HomePage = () => {
   const { state, dispatch } = usePost();
   const { api } = useAxios();
@@ -34,7 +35,8 @@ const HomePage = () => {
 
   return (
     <div>
-      {/* <PostList  posts={state?.posts}/> */}de
+      <NewPost/>
+      <PostList  posts={state?.posts}/>
     </div>
   );
 };
